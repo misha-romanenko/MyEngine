@@ -5,6 +5,7 @@
 #include <SDL3_image/SDL_image.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <Texture.h>
 
 extern SDL_Window *EngineWindow;
 extern SDL_Renderer *EngineRenderer;
@@ -16,6 +17,14 @@ extern bool KeysDown[SDL_SCANCODE_COUNT];
 
 extern bool EngineQuit;
 
+typedef struct Vector
+{
+
+  float x;
+  float y;
+
+} Vector;
+
 typedef enum FlipMode
 {
     FLIP_NONE,
@@ -23,19 +32,7 @@ typedef enum FlipMode
     FLIP_VERTICAL
 } FlipMode;
 
-typedef struct Colour 
-{
-  int Red;
-  int Green;
-  int Blue;
-  int Alpha;
-}  Colour;
 
-typedef struct Texture 
-{
-  SDL_Surface *surface;
-  SDL_Texture *texture;
-} Texture;
 
 typedef struct Rect {
   float x;
@@ -51,6 +48,8 @@ void DrawTexture(Texture *TextureStruct, Rect *source, Rect destination);
 void DrawTextureRotated(Texture *TextureStruct, Rect *source, Rect destination, float rotation, FlipMode flip_type);
 
 void DrawRectangle(Colour colour, Rect rect);
+
+void DrawOutline(Rect OutlineRect);
 
 int EngineInit(int SCREEN_WIDTH, int SCREEN_HEIGHT, const char *WINDOW_LABLE);
 
@@ -76,7 +75,12 @@ void EngineBeginFrame(void);
 
 bool FreeTexture(Texture *texture);
 
-void EngineDestroy();
+void EngineDestroy(void);
+
+bool IsCollision(Rect rect1, Rect rect2);
+
+Rect GetCollisionRect(Rect rect1, Rect rect2);
+
 
 
 #endif // !ENGINE_H

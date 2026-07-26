@@ -114,6 +114,13 @@ void DrawRectangle(Colour colour, Rect rect)
 
 }
 
+void DrawOutline(Rect OutlineRect)
+{
+
+  //SDL_RenderRect(EngineRenderer, GetFRectFromRect(OutlineRect));
+
+}
+
 
 
 int EngineInit(int SCREEN_WIDTH, int SCREEN_HEIGHT, const char *WINDOW_LABLE)
@@ -291,6 +298,47 @@ bool FreeTexture(Texture *texture)
   SDL_DestroySurface(texture->surface);
   
   free(texture);
+}
+
+bool IsCollision(Rect rect1, Rect rect2)
+{
+
+  //
+
+  if (rect1.x + rect1.width < rect2.x) { return false; }
+
+  // 
+
+  if (rect2.x + rect2.width < rect1.x) { return false; }
+
+  // 
+
+  if (rect1.y + rect1.height < rect2.y) { return false; }
+
+  // 
+
+  if (rect2.y + rect2.height < rect1.y) { return false; }
+
+  // if nothing returned return true as a sign of collision
+  
+  return true;
+
+}
+
+
+Rect GetCollisionRect(Rect rect1, Rect rect2)
+{
+
+  Rect CollisionRect;
+
+  
+
+
+
+
+  return CollisionRect;
+
+
 }
 
 
