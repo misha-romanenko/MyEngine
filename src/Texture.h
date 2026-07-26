@@ -1,6 +1,10 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
+#include <SDL3_image/SDL_image.h>
+#include "Shapes.h"
+
+
 typedef struct Texture 
 {
 
@@ -18,6 +22,33 @@ typedef struct Colour
   int Alpha;
   
 }  Colour;
+
+typedef enum FlipMode
+{
+    FLIP_NONE,
+    FLIP_HORIZONTAL,
+    FLIP_VERTICAL
+
+} FlipMode;
+
+
+Texture *LoadTexture(const char *filepath);
+
+void DrawBackground(Colour colour);
+
+void DrawTexture(Texture *TextureStruct, Rect *source, Rect destination);
+
+void DrawTextureRotated(Texture *TextureStruct, Rect *source, Rect destination, float rotation, FlipMode flip_type);
+
+void DrawRectangle(Colour colour, Rect rect);
+
+void DrawOutline(Rect OutlineRect);
+
+bool FreeTexture(Texture *texture);
+
+void EndDrawing(void);
+
+
 
 
 #endif

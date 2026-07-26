@@ -2,85 +2,13 @@
 #define ENGINE_H
 
 #include <SDL3/SDL.h>
-#include <SDL3_image/SDL_image.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <Texture.h>
+#include "Texture.h"
+#include "Input.h"
+#include "Event.h"
+#include "Shapes.h"
+#include "Collision.h"
 
 extern SDL_Window *EngineWindow;
 extern SDL_Renderer *EngineRenderer;
-extern SDL_Event EngineEvent;
-
-extern bool KeysPressed[SDL_SCANCODE_COUNT];
-extern bool KeysReleased[SDL_SCANCODE_COUNT];
-extern bool KeysDown[SDL_SCANCODE_COUNT];
-
-extern bool EngineQuit;
-
-typedef struct Vector
-{
-
-  float x;
-  float y;
-
-} Vector;
-
-typedef enum FlipMode
-{
-    FLIP_NONE,
-    FLIP_HORIZONTAL,
-    FLIP_VERTICAL
-} FlipMode;
-
-
-
-typedef struct Rect {
-  float x;
-  float y;
-  float width;
-  float height;
-} Rect;
-
-Texture *LoadTexture(const char *filepath);
-
-void DrawTexture(Texture *TextureStruct, Rect *source, Rect destination);
-
-void DrawTextureRotated(Texture *TextureStruct, Rect *source, Rect destination, float rotation, FlipMode flip_type);
-
-void DrawRectangle(Colour colour, Rect rect);
-
-void DrawOutline(Rect OutlineRect);
-
-int EngineInit(int SCREEN_WIDTH, int SCREEN_HEIGHT, const char *WINDOW_LABLE);
-
-void DrawBackground(Colour colour);
-
-void FPSLimitSet(int fps_limit_value);
-
-SDL_FRect GetFRectFromRect(Rect OriginalRect);
-
-void EndDrawing(void);
-
-bool IsKeyDown(SDL_Scancode key);
-
-bool IsKeyPressed(SDL_Scancode key);
-
-bool IsKeyReleased(SDL_Scancode key);
-
-float GetFrameTime(void);
-
-bool IsQuit(void);
-
-void EngineBeginFrame(void);
-
-bool FreeTexture(Texture *texture);
-
-void EngineDestroy(void);
-
-bool IsCollision(Rect rect1, Rect rect2);
-
-Rect GetCollisionRect(Rect rect1, Rect rect2);
-
-
 
 #endif // !ENGINE_H

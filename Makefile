@@ -3,15 +3,21 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -Isrc
 LIBS = -lSDL3 -lSDL3_image
 
+SRC = $(wildcard src/*.c)
+
+
 all: flappy platformer
+
+
+
 
 flappy:
 	mkdir -p build
-	$(CC) $(CFLAGS) src/Engine.c games/FlappyBird.c -o build/FlappyBird $(LIBS)
+	$(CC) $(CFLAGS) $(SRC) src/Engine.c games/FlappyBird.c -o build/FlappyBird $(LIBS)
 
 platformer:
 	mkdir -p build
-	$(CC) $(CFLAGS) src/Engine.c games/Platformer.c -o build/Platformer $(LIBS)
+	$(CC) $(CFLAGS) $(SRC) games/Platformer.c -o build/Platformer $(LIBS)
 
 run-flappy: flappy
 	./build/FlappyBird
