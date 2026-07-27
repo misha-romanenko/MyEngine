@@ -3,6 +3,10 @@
 
 #include <SDL3/SDL.h>
 #include <stdbool.h>
+#include <Input.h>
+
+extern SDL_Window *EngineWindow;
+extern SDL_Renderer *EngineRenderer;
 
 extern SDL_Event EngineEvent;
 

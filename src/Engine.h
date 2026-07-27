@@ -8,7 +8,6 @@
 #include "Shapes.h"
 #include "Collision.h"
 
-extern SDL_Window *EngineWindow;
-extern SDL_Renderer *EngineRenderer;
+
 
 #endif // !ENGINE_H

@@ -1,4 +1,5 @@
 #include "Texture.h"
+
 #include <SDL3/SDL.h>
 #include <stdlib.h>
 
@@ -42,7 +43,7 @@ void DrawBackground(Colour colour)
 
 void DrawTexture(Texture *TextureStruct, Rect *source, Rect destination)
 {
-  
+ 
   
   SDL_FRect *ptr = NULL;
 
@@ -105,6 +106,56 @@ void DrawTextureRotated(Texture *TextureStruct, Rect *source, Rect destination, 
     sdlFlip
 );
 }
+
+
+Rect AnimationFrame(Animation *self)
+{ // croppping the frame to cur frame
+
+  int x = (self->cur % self->FramesPerRow) * self->FrameWidth;
+  int y = (self->cur / self->FramesPerRow) * self->FrameHeight;
+
+  Rect ReturnRect = {
+    x,
+    y,
+    self->FrameWidth,
+    self->FrameHeight
+  };
+
+
+  return ReturnRect;
+}
+
+void AnimationUpdate(Animation *self, float delta_time)
+{
+
+  self->duration_left -= delta_time;
+
+  if (self->duration_left <= 0.0)
+  { // if duration of frame has finished
+    self->duration_left = self->animSpeed;
+    self->cur++;
+
+    if (self->cur > self->last)
+    { // repeat
+      self->cur = self->first;
+    }
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 void DrawRectangle(Colour colour, Rect rect)

@@ -6,7 +6,7 @@ LIBS = -lSDL3 -lSDL3_image
 SRC = $(wildcard src/*.c)
 
 
-all: flappy platformer
+all: flappy platformer animation-demo
 
 
 
@@ -19,11 +19,19 @@ platformer:
 	mkdir -p build
 	$(CC) $(CFLAGS) $(SRC) games/Platformer.c -o build/Platformer $(LIBS)
 
+animation-demo:
+	mkdir -p build
+	$(CC) $(CFLAGS) $(SRC) games/AnimationDemo.c -o build/AnimationDemo $(LIBS)
+
 run-flappy: flappy
 	./build/FlappyBird
 
 run-platformer: platformer
 	./build/Platformer
+
+run-animation-demo: animation-demo
+	./build/AnimationDemo
+
 
 clean:
 	rm -rf build

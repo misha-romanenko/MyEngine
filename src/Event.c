@@ -1,6 +1,7 @@
 #include "Event.h"
 
-
+SDL_Window *EngineWindow = NULL;
+SDL_Renderer *EngineRenderer = NULL;
 
 SDL_Event EngineEvent;
 

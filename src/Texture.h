@@ -3,7 +3,7 @@
 
 #include <SDL3_image/SDL_image.h>
 #include "Shapes.h"
-
+#include "Event.h"
 
 typedef struct Texture 
 {
@@ -23,6 +23,23 @@ typedef struct Colour
   
 }  Colour;
 
+typedef struct Animation {
+
+  
+  
+  int first;
+  int last;
+  int cur;
+
+  float animSpeed;
+  float duration_left;
+
+  int FramesPerRow;
+  int FrameWidth;
+  int FrameHeight;
+
+} Animation;
+
 typedef enum FlipMode
 {
     FLIP_NONE,
@@ -36,9 +53,17 @@ Texture *LoadTexture(const char *filepath);
 
 void DrawBackground(Colour colour);
 
+
+
 void DrawTexture(Texture *TextureStruct, Rect *source, Rect destination);
 
 void DrawTextureRotated(Texture *TextureStruct, Rect *source, Rect destination, float rotation, FlipMode flip_type);
+
+
+void AnimationUpdate(Animation *self, float delta_time);
+
+Rect *AnimationFrame(Animation *self);
+
 
 void DrawRectangle(Colour colour, Rect rect);
 
