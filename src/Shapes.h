@@ -3,7 +3,7 @@
 
 #include <SDL3/SDL.h>
 
-typedef struct Vector
+typedef struct Vector2
 {
 
   float x;
@@ -17,6 +17,15 @@ typedef struct Rect {
   float width;
   float height;
 } Rect;
+
+typedef struct Point {
+
+
+  float x;
+  float y;
+
+
+} Point;
 
 SDL_FRect GetFRectFromRect(Rect OriginalRect);
 

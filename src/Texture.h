@@ -31,7 +31,7 @@ typedef struct Animation {
   int last;
   int cur;
 
-  float animSpeed;
+  float AnimationSpeed;
   float duration_left;
 
   int FramesPerRow;
@@ -59,10 +59,11 @@ void DrawTexture(Texture *TextureStruct, Rect *source, Rect destination);
 
 void DrawTextureRotated(Texture *TextureStruct, Rect *source, Rect destination, float rotation, FlipMode flip_type);
 
+void DrawTextureRotatedPro(Texture *TextureStruct, Rect *source, Rect destination, float rotation, FlipMode flip_type, const SDL_FPoint *center);
 
 void AnimationUpdate(Animation *self, float delta_time);
 
-Rect *AnimationFrame(Animation *self);
+Rect AnimationFrame(Animation *self);
 
 
 void DrawRectangle(Colour colour, Rect rect);

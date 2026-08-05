@@ -7,6 +7,7 @@
 #include "Event.h"
 #include "Shapes.h"
 #include "Collision.h"
+#include "Camera.h"
 
 
 

@@ -107,6 +107,51 @@ void DrawTextureRotated(Texture *TextureStruct, Rect *source, Rect destination, 
 );
 }
 
+void DrawTextureRotatedPro(Texture *TextureStruct, Rect *source, Rect destination, float rotation, FlipMode flip_type, const SDL_FPoint *center)
+{
+
+  SDL_FRect *ptr = NULL;
+
+  SDL_FRect DestinationCopy = GetFRectFromRect(destination);
+
+  SDL_FRect SourceCopy;
+
+  if (source != NULL)
+  {
+    SourceCopy = GetFRectFromRect(*source);
+    ptr = &SourceCopy;
+  }
+
+  SDL_FlipMode sdlFlip;
+
+  switch (flip_type)
+  {
+    case FLIP_NONE:
+        sdlFlip = SDL_FLIP_NONE;
+        break;
+
+    case FLIP_HORIZONTAL:
+        sdlFlip = SDL_FLIP_HORIZONTAL;
+        break;
+
+    case FLIP_VERTICAL:
+        sdlFlip = SDL_FLIP_VERTICAL;
+        break;
+  }
+
+  SDL_RenderTextureRotated(
+    EngineRenderer,
+    TextureStruct->texture,
+    ptr,
+    &DestinationCopy,
+    rotation,
+    center,
+    sdlFlip
+);
+}
+
+
+
 
 Rect AnimationFrame(Animation *self)
 { // croppping the frame to cur frame
@@ -114,6 +159,7 @@ Rect AnimationFrame(Animation *self)
   int x = (self->cur % self->FramesPerRow) * self->FrameWidth;
   int y = (self->cur / self->FramesPerRow) * self->FrameHeight;
 
+  
   Rect ReturnRect = {
     x,
     y,
@@ -132,7 +178,7 @@ void AnimationUpdate(Animation *self, float delta_time)
 
   if (self->duration_left <= 0.0)
   { // if duration of frame has finished
-    self->duration_left = self->animSpeed;
+    self->duration_left = self->AnimationSpeed;
     self->cur++;
 
     if (self->cur > self->last)
